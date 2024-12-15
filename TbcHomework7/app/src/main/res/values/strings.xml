@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">TbcHomework7</string>
+    <string name="log_in">Log in</string>
+    <string name="register">REGISTER</string>
+    <string name="text_register">Register</string>
+    <string name="signing_terms">By signing up, you agree to Photo’s Terms of Service and Privacy Policy.</string>
+    <string name="next">Next\n</string>
+    <string name="registration_was_unsuccessful">Registration Was Unsuccessful</string>
+    <string name="login_was_unsuccessful">Login was Unsuccessful</string>
+    <string name="fill_empty_fields">Fill Empty Fields</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="some_of_the_fields_are_empty">Some Of The Fields Are Empty</string>
+    <string name="input_valid_email">Input Valid Email</string>
+    <string name="field_is_empty">Field Is Empty</string>
+    <string name="password_is_too_short_minimum_input_5">Password Is Too Short, Minimum Input 5</string>
+    <string name="password_must_contain_minimum_1_symbol">Password Must Contain Minimum 1 Symbol</string>
+</resources>
