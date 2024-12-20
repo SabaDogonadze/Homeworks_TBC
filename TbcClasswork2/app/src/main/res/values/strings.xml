@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">TbcClasswork2</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search">Search</string>
+    <string name="add_new_user">Add New User</string>
+    <string name="birthday">birthday</string>
+    <string name="address">address</string>
+    <string name="email">email</string>
+    <string name="save">Save</string>
+    <string name="lastname">lastName</string>
+    <string name="firstname">FirstName</string>
+    <string name="id">Id</string>
+    <string name="desc">desc</string>
+</resources>

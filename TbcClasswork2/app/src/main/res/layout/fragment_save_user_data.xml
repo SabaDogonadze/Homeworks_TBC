@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SaveUserDataFragment">
+
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/tvUserId"
+        android:hint="@string/id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/tvFirstName"
+        android:hint="@string/firstname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/tvLastName"
+        android:hint="@string/lastname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/tvBirthday"
+        android:layout_width="match_parent"
+        android:hint="@string/birthday"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/tvAddress"
+        android:hint="@string/address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/tvEmail"
+        android:hint="@string/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/tvDesc"
+        android:hint="@string/desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnAddUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/save" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
