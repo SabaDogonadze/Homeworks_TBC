@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
 
 
-    <androidx.appcompat.widget.AppCompatEditText
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/etMessage"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -15,23 +15,47 @@
         android:background="@drawable/user_chat_et_background"
         android:paddingStart="30dp"
         android:paddingTop="15dp"
-        android:paddingEnd="10dp"
+        android:paddingEnd="30dp"
         android:paddingBottom="20dp"
-        android:text="ragaca gamovida ragaca"
+        android:text="text text text"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_max="300dp" />
 
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvMessageDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/today"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etMessage" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvMessageTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="5dp"
-        android:text="Today, 13:30pm"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etMessage" />
+        android:layout_marginStart="3dp"
+        android:text="13:30"
+        app:layout_constraintBottom_toBottomOf="@+id/tvMessageDate"
+        app:layout_constraintStart_toEndOf="@+id/tvMessageDate"
+        app:layout_constraintTop_toTopOf="@+id/tvMessageDate" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvMessagePm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:text="@string/pm"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvMessageTime"
+        app:layout_constraintStart_toEndOf="@+id/tvMessageTime"
+        app:layout_constraintTop_toTopOf="@+id/tvMessageTime" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"

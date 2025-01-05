@@ -1,29 +1,32 @@
-package com.example.tbchomework13
+package com.example.tbchomework13.data
+
+import com.example.tbchomework13.model.ChatMessage
+import com.example.tbchomework13.model.MessageType
 
 object MessageData {
     var messageList: MutableList<ChatMessage> = mutableListOf<ChatMessage>(
         ChatMessage(
-            id = 1,
-            message = "Hello",
-            date = "Today,13:30 pm",
-            type = MessageType.FRIEND
-        ),
-        ChatMessage(
             id = 2,
-            message = "Hi",
-            date = "Today,13:31 pm",
-            type = MessageType.USER
+            message = "Hello",
+            date = "13:30",
+            type = MessageType.FRIEND
         ),
         ChatMessage(
             id = 3,
-            message = "How Are You?",
-            date = "Today,13:32 pm",
-            type = MessageType.FRIEND
+            message = "Hi",
+            date = "13:31",
+            type = MessageType.USER
         ),
         ChatMessage(
             id = 4,
+            message = "How Are You?",
+            date = "13:32",
+            type = MessageType.FRIEND
+        ),
+        ChatMessage(
+            id = 5,
             message = "Good. You?",
-            date = "Today,13:35 pm",
+            date = "13:35",
             type = MessageType.USER
         ),
 

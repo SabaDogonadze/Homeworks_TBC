@@ -1,4 +1,4 @@
-package com.example.tbchomework13
+package com.example.tbchomework13.model
 
 data class ChatMessage(
     val id:Int,

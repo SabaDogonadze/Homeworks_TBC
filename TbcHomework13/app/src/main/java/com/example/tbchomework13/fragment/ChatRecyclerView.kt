@@ -1,4 +1,4 @@
-package com.example.tbchomework13
+package com.example.tbchomework13.fragment
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tbchomework13.databinding.ChatMessageFriendViewholderBinding
 import com.example.tbchomework13.databinding.ChatMessageUserViewholderBinding
+import com.example.tbchomework13.model.ChatMessage
+import com.example.tbchomework13.model.MessageType
 
 class ChatRecyclerView : ListAdapter<ChatMessage, RecyclerView.ViewHolder>(object :
     DiffUtil.ItemCallback<ChatMessage>() {
@@ -38,14 +40,14 @@ class ChatRecyclerView : ListAdapter<ChatMessage, RecyclerView.ViewHolder>(objec
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (viewType == FRIEND) {
-            ChatMessageViewHolder(
+            ChatMessageFriendViewHolder(
                 ChatMessageFriendViewholderBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
                 )
             )
-        } else ChatMessage2ViewHolder(
+        } else ChatMessageUserViewHolder(
             ChatMessageUserViewholderBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
@@ -56,29 +58,29 @@ class ChatRecyclerView : ListAdapter<ChatMessage, RecyclerView.ViewHolder>(objec
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = currentList[position]
-        if (holder is ChatMessageViewHolder) {
+        if (holder is ChatMessageFriendViewHolder) {
             holder.bind(item)
         }
-        if (holder is ChatMessage2ViewHolder) {
+        if (holder is ChatMessageUserViewHolder) {
             holder.bind(item)
         }
     }
 
-    inner class ChatMessageViewHolder(private var binding: ChatMessageFriendViewholderBinding) :
+    inner class ChatMessageFriendViewHolder(private var binding: ChatMessageFriendViewholderBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ChatMessage) {
             binding.apply {
-                etMessage.setText(item.message)
+                etMessage.text = item.message
                 tvMessageTime.text = item.date
             }
         }
     }
 
-    inner class ChatMessage2ViewHolder( var binding: ChatMessageUserViewholderBinding) :
+    inner class ChatMessageUserViewHolder(private var binding: ChatMessageUserViewholderBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ChatMessage) {
           binding.apply {
-              etMessage.setText(item.message)
+              etMessage.text = item.message
               tvMessageTime.text = item.date
           }
         }
