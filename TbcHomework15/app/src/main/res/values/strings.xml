@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">TbcHomework15</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="payment">Payment</string>
+    <string name="card_management">Card Management</string>
+    <string name="add_new">Add New+</string>
+    <string name="or_check_out_with">or check out with</string>
+    <string name="add_new_card">Add New card</string>
+    <string name="cardholder_name">Cardholder Name</string>
+    <string name="user_name_cannot_be_empty">User name cannot be empty</string>
+    <string name="card_number_must_be_16_digits">Card number must be 16 digits</string>
+    <string name="expiration_date_must_be_4_digits">Expiration date must be 4 digits</string>
+    <string name="cvv_must_be_3_digits">CVV must be 3 digits</string>
+    <string name="inputs_are_wrong">Inputs Are Wrong</string>
+    <string name="valid_thru">VALID THRU</string>
+    <string name="add_mastercard">Add MasterCard</string>
+    <string name="add_visa">Add Visa</string>
+    <string name="add_card">Add card</string>
+    <string name="cvv">CVV</string>
+    <string name="mm_yy">MM/YY</string>
+    <string name="expires">expires</string>
+    <string name="card_number">Card Number</string>
+    <string name="name">Name</string>
+</resources>
