@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="@color/blue"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_user_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="10dp"
+        android:text="Alice Smith"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/tv_time_number"
+        app:layout_constraintStart_toEndOf="@+id/iv_icon"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_message"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toStartOf="@+id/tv_unread_message"
+        android:layout_marginTop="10dp"
+        android:maxLines="1"
+        android:text="Great. i willl have a look"
+        app:layout_constraintStart_toEndOf="@+id/iv_icon"
+        app:layout_constraintTop_toBottomOf="@+id/tv_user_name" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:text="Pm"
+        app:layout_goneMarginEnd="10dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_time_number"
+        android:layout_width="wrap_content"
+        android:textColor="@color/white"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        android:text="4:20"
+        app:layout_constraintEnd_toStartOf="@+id/tv_time"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_unread_message"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:textColor="@color/white"
+        android:background="@drawable/unread_message_background"
+        android:text="3"
+        android:gravity="center_horizontal"
+        app:layout_constraintEnd_toStartOf="@+id/tv_time"
+        app:layout_constraintTop_toBottomOf="@+id/tv_time_number" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
