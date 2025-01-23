@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">TbcHomework18</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="repeat_password">Repeat Password</string>
+    <string name="register">Register</string>
+    <string name="back">Back</string>
+    <string name="email_not_found">Email Not Found</string>
+    <string name="log_out">Log Out</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="log_in">Log IN</string>
+    <string name="not_registered_register_now">Not Registered? Register Now</string>
+    <string name="register_now">Register Now</string>
+</resources>
