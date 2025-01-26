@@ -1,0 +1,13 @@
+package com.example.tbchomework18.datastore
+
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
+
+object SessionTracker {
+    private val _userSession = MutableSharedFlow<Boolean>()
+    val userSession: SharedFlow<Boolean> get() = _userSession
+
+    suspend fun emitSessionState(isLoggedIn: Boolean) {
+        _userSession.emit(isLoggedIn)
+    }
+}

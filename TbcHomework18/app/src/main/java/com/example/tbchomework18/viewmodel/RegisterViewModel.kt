@@ -7,6 +7,7 @@ import com.example.tbchomework18.common.Resource
 import com.example.tbchomework18.data.UserRegisterRequest
 import com.example.tbchomework18.data.UserRegisterResponse
 import com.example.tbchomework18.network.Network
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -19,7 +20,7 @@ class RegisterViewModel:ViewModel() {
     val viewsValidationState : StateFlow<String?> = _viewsValidationState
 
     fun userRegister(userRegisterRequest: UserRegisterRequest){
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             _userRegisterResponseFlow.value = Resource.Loading(true)
             try {
                 val userRegisterServerResponse = Network.networkService().register(userRegisterRequest)

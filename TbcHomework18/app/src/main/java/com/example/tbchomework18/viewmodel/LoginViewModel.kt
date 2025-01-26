@@ -7,6 +7,7 @@ import com.example.tbchomework18.data.UserLogInRequest
 import com.example.tbchomework18.data.UserLogInResponse
 import com.example.tbchomework18.datastore.DataStoreUtil
 import com.example.tbchomework18.network.Network
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -23,9 +24,8 @@ class LoginViewModel:ViewModel() {
             DataStoreUtil.saveEmailAndSession(email)
         }
     }
-
     fun getUserResponse(userLoginRequest: UserLogInRequest){
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             _userLogInResponseFlow.value = Resource.Loading(true)
             try {
                 val userLoginResponse = Network.networkService().logIn(userRequest = userLoginRequest)
@@ -51,7 +51,5 @@ class LoginViewModel:ViewModel() {
         }
         return true
     }
-
-
 
 }

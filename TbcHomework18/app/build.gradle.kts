@@ -50,6 +50,7 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.navigation.fragment)
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
     implementation(libs.navigation.ui)
     implementation(libs.material)
     implementation(libs.androidx.activity)

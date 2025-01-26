@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".fragment.ProfileFragment">
+
+
+    <ProgressBar
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:visibility="gone"
+        android:id="@+id/progress_bar"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:maxLines="2"
+        android:hint="@string/email_not_found"
+        android:id="@+id/tv_email"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="40dp"
+        android:textColor="@color/white"
+        android:background="@color/red"
+        android:id="@+id/btn_log_out"
+        android:text="@string/log_out"/>
+
+
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

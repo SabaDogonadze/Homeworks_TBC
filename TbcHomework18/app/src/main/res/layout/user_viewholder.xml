@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_user_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:text="User@gmail.com" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_user_first_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:text="Jack" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_user_last_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:text="Rise" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_user_image"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp" />
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -1,6 +1,5 @@
 package com.example.tbchomework18.fragment
 
-import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -11,8 +10,8 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.tbchomework18.common.Resource
 import com.example.tbchomework18.data.UserLogInRequest
-import com.example.tbchomework18.viewmodel.LoginViewModel
 import com.example.tbchomework18.databinding.FragmentLogInBinding
+import com.example.tbchomework18.viewmodel.LoginViewModel
 import kotlinx.coroutines.launch
 import java.util.jar.Pack200.Packer.PASS
 
@@ -63,7 +62,7 @@ class LogInFragment : BaseFragment<FragmentLogInBinding>(FragmentLogInBinding::i
                         is Resource.Success -> {
                             viewModel.saveEmailAndUserSession(binding.etEmail.text.toString())
                             Log.d("12345", "ragaca: $it")
-                            sendDataToHomeFragment(binding.etEmail.text.toString())
+                          /*  sendDataToHomeFragment(binding.etEmail.text.toString())*/
                             openHomeFragment()
                         }
                         is Resource.Error ->  {
@@ -101,13 +100,13 @@ class LogInFragment : BaseFragment<FragmentLogInBinding>(FragmentLogInBinding::i
 
     }
 
-    private fun sendDataToHomeFragment(email:String){
+  /*  private fun sendDataToHomeFragment(email:String){
         parentFragmentManager.setFragmentResult(
             "SuccessfullEmail",
             Bundle().apply {
                 putString("emailKey", email)
             }
         )
-    }
+    }*/
 
 }
