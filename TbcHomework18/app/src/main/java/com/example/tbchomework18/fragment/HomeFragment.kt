@@ -23,10 +23,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
 
     override fun setUp() {
-            homeViewModel.getUserData()
-            setUpRecycler()
-            bindObservers()
-            clickListeners()
+        homeViewModel.getUserData()
+        setUpRecycler()
+        bindObservers()
+        clickListeners()
     }
 
     override fun clickListeners() {
@@ -43,30 +43,36 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
     }
 
-    private fun bindObservers(){
+    private fun bindObservers() {
         viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
-                homeViewModel.userDataResponseFlow.collect{
-                   when(it){
-                       is Resource.Success -> {
-                           binding.loader.visibility = View.GONE
-                           d("homeViewModel","succsess")
-                           d("homeViewModel","${homeViewModel.userDataResponseFlow.value?.data?.data}")
-                           it.data?.data?.let { data ->
-                               adapter.submitList(data)
-                           }
-                       }
-                       is Resource.Error -> {
-                            Toast.makeText(context,"Some Error", Toast.LENGTH_SHORT).show()
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                homeViewModel.userDataResponseFlow.collect {
+                    when (it) {
+                        is Resource.Success -> {
                             binding.loader.visibility = View.GONE
-                           d("homeViewModel","error")
-                       }
-                       is Resource.Loading -> {
-                           d("homeViewModel","loader")
+                            d("homeViewModel", "succsess")
+                            d(
+                                "homeViewModel",
+                                "${homeViewModel.userDataResponseFlow.value?.data?.data}"
+                            )
+                            it.data?.data?.let { data ->
+                                adapter.submitList(data)
+                            }
+                        }
+
+                        is Resource.Error -> {
+                            Toast.makeText(context, "Some Error", Toast.LENGTH_SHORT).show()
+                            binding.loader.visibility = View.GONE
+                            d("homeViewModel", "error")
+                        }
+
+                        is Resource.Loading -> {
+                            d("homeViewModel", "loader")
                             binding.loader.visibility = View.VISIBLE
-                       }
-                       null -> PASS
-                   }
+                        }
+
+                        null -> PASS
+                    }
                 }
             }
         }

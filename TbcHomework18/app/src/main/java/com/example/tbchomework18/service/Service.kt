@@ -9,7 +9,6 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
-import retrofit2.http.Query
 
 interface NetworkService {
     @POST("login")
@@ -18,6 +17,12 @@ interface NetworkService {
     @POST("register")
     suspend fun register(@Body userRequest: UserRegisterRequest): Response<UserRegisterResponse>
 
+   /* @GET("users")
+    suspend fun getUsersData():Response<HomePageServerResponse>*/
+
+}
+
+interface UsersService{
     @GET("users")
-    suspend fun getUsersData(/*@Query("page") page: Int*/):Response<HomePageServerResponse>
+    suspend fun getUsersData():Response<HomePageServerResponse>
 }

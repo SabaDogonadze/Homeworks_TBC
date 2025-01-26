@@ -19,7 +19,7 @@ class HomeViewModel:ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             _userDataResponseFlow.value = Resource.Loading(load = true)
             try {
-                val userServerResponse = Network.networkService().getUsersData()
+                val userServerResponse = Network.usersService().getUsersData()
                 d("homeViewModel","${userServerResponse}")
                 if(userServerResponse.isSuccessful){
                     _userDataResponseFlow.value = Resource.Success(dataSuccess = userServerResponse.body())

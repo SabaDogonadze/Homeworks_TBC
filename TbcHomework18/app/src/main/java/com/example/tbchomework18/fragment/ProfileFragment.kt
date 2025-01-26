@@ -18,8 +18,14 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     private val profileViewModel: ProfileViewModel by viewModels()
     override fun setUp() {
         Log.d("12345", "HomeFragmentOpened")
-        getEmailFromDataStore()
-        clickListeners()
+       viewLifecycleOwner.lifecycleScope.launch {
+           repeatOnLifecycle(Lifecycle.State.STARTED){
+               getEmailFromDataStore()  // this is not good practice to use delay i think
+               clickListeners()
+               delay(1000)
+               getDataFromLoginFragment()
+           }
+       }
     }
 
     override fun clickListeners() {
@@ -45,19 +51,17 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         }
     }
 
+    private fun getDataFromLoginFragment() {
+        parentFragmentManager.setFragmentResultListener(
+            "SuccessfullEmail",
+            viewLifecycleOwner
+        ) { _, bundle ->
+            val email = bundle.getString("emailKey")
+            binding.tvEmail.text = email
+        }
+    }
+
     private fun openLogInFragment() {
         findNavController().navigate(ProfileFragmentDirections.actionHomeFragmentToLogInFragment())
     }
 }
-
-
-
-/* private fun getDataFromLoginFragment() {
-       parentFragmentManager.setFragmentResultListener(
-           "SuccessfullEmail",
-           viewLifecycleOwner
-       ) { _, bundle ->
-           val email = bundle.getString("emailKey")
-           binding.tvEmail.text = email
-       }
-   }*/

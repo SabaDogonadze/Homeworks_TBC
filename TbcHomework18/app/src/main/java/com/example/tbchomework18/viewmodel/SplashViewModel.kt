@@ -18,7 +18,6 @@ class SplashViewModel : ViewModel() {
 }
 
 
-
 /* private val _userSession = MutableSharedFlow<Boolean>()
    val userSession: SharedFlow<Boolean> get() = _userSession*/
 

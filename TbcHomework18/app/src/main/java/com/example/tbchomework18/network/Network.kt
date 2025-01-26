@@ -1,6 +1,7 @@
 package com.example.tbchomework18.network
 
 import com.example.tbchomework18.service.NetworkService
+import com.example.tbchomework18.service.UsersService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
@@ -15,5 +16,5 @@ object Network {
     }
 
     fun networkService() = retrofit.create(NetworkService::class.java)
-
+    fun usersService() = retrofit.create(UsersService::class.java)
 }
