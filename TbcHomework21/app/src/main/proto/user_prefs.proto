@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+option java_package = "com.example.tbchomework21";
+option java_multiple_files = true;
+
+message UserPreferences {
+  // filter for showing / hiding completed tasks
+ /* bool show_completed = 1;*/
+  string user_first_name = 1;
+  string user_last_name = 2;
+  string user_email = 3;
+
+}
