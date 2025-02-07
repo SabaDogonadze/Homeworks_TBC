@@ -1,5 +1,6 @@
 package com.example.tbchomework22.adapter
 
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -28,19 +29,17 @@ class PasswordOvalRecyclerAdapter(private var items:List<PasswordOvals>):Recycle
     fun updateList(newItems: List<PasswordOvals>) {
         items = newItems
         notifyDataSetChanged()
-
     }
 
     inner class PasswordOvalViewHolder(private var binding: PasswordOvalViewholderBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(){
             val item = items[absoluteAdapterPosition]
-            if (item.ovalStatus == OvalStatus.CHECKED){
-                val color = ContextCompat.getColor(binding.ivOvalButton.context, R.color.green)
-                binding.ivOvalButton.setBackgroundColor(color )
-            }else{
-                val color = ContextCompat.getColor(binding.ivOvalButton.context, R.color.gray)
-                binding.ivOvalButton.setBackgroundColor(color )
+            val color = if (item.ovalStatus == OvalStatus.CHECKED) {
+                ContextCompat.getColor(binding.ivOvalButton.context, R.color.green)
+            } else {
+                ContextCompat.getColor(binding.ivOvalButton.context, R.color.gray)
             }
+            binding.ivOvalButton.backgroundTintList = ColorStateList.valueOf(color)
         }
     }
 
