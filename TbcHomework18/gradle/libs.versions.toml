@@ -17,6 +17,7 @@ kotlinxSerializationJson = "1.8.0"
 moshiKotlin = "1.15.1"
 retrofitVersion = "2.11.0"
 filamentAndroid = "1.17.1"
+paging_version = "3.3.5"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -36,6 +37,7 @@ filament-android = { group = "com.google.ar.sceneform", name = "filament-android
 moshi-kotlin = { group = "com.squareup.moshi",name = "moshi-kotlin", version.ref = "moshiKotlin" }
 squareup-converter-moshi = { group = "com.squareup.retrofit2",name = "converter-moshi", version.ref = "retrofitVersion" }
 retrofit2-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofitVersion" }
+paging = { group = "androidx.paging",name = "paging-runtime", version.ref = "paging_version" }
 
 
 [plugins]

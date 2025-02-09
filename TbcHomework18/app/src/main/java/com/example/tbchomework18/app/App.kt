@@ -1,7 +1,9 @@
 package com.example.tbchomework18.app
 
 import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
 
+@HiltAndroidApp
 class App:Application() {
 
         companion object{

@@ -3,6 +3,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.safeargs)
     alias(libs.plugins.kotlin.serialization)
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -51,6 +53,7 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.navigation.fragment)
     implementation ("com.github.bumptech.glide:glide:4.16.0")
+    implementation(libs.paging)
     implementation(libs.navigation.ui)
     implementation(libs.material)
     implementation(libs.androidx.activity)
@@ -59,4 +62,10 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
+}
+
+kapt {
+    correctErrorTypes = true
 }
