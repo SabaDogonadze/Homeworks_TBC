@@ -9,9 +9,11 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.tbchomework18.databinding.FragmentProfileBinding
 import com.example.tbchomework18.presentation.base.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBinding::inflate) {
     private val profileViewModel: ProfileViewModel by viewModels()
     override fun setUp() {

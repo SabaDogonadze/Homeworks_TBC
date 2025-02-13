@@ -14,9 +14,11 @@ import androidx.navigation.fragment.findNavController
 import com.example.tbchomework18.data.local.datastore.SessionTracker
 import com.example.tbchomework18.databinding.FragmentSplashBinding
 import com.example.tbchomework18.presentation.base.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class SplashFragment : Fragment(){ // i dont need base fragment here because it violates solid
     private val viewModel: SplashViewModel by viewModels()
     private var _binding: FragmentSplashBinding? = null

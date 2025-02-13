@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tbchomework18.data.common.Resource
 import com.example.tbchomework18.data.remote.UserLogInRequest
+import com.example.tbchomework18.domain.datastore.DataStoreRepository
 import com.example.tbchomework18.domain.log_in.LogInRepository
 import com.example.tbchomework18.domain.log_in.LogInResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,7 +15,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(private val logInRepository: LogInRepository):ViewModel() {
+class LoginViewModel @Inject constructor(private val logInRepository: LogInRepository,private val dataStoreRepository: DataStoreRepository):ViewModel() {
     private val _userLogInResponseFlow = MutableStateFlow<Resource<LogInResponse>?>(null)
     val userLoginResponseFlow: StateFlow<Resource<LogInResponse>?> = _userLogInResponseFlow
 
@@ -23,7 +24,7 @@ class LoginViewModel @Inject constructor(private val logInRepository: LogInRepos
 
     fun saveEmailAndUserSession(email:String){
         viewModelScope.launch {
-          /*  DataStoreUtil.saveEmailAndSession(email)*/
+            dataStoreRepository.saveEmailAndSession(email)
         }
     }
     fun getUserResponse(userLoginRequest: UserLogInRequest){

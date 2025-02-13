@@ -1,4 +1,4 @@
-package com.example.tbchomework18.paging
+package com.example.tbchomework18.data.paging
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

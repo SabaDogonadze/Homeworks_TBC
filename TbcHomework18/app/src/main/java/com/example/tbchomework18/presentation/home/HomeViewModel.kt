@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel@Inject constructor(private val getUserRepository: GetUserRepository,  private val getUsersDataService: GetUsersDataService):ViewModel() {
+class HomeViewModel@Inject constructor(private val getUserRepository: GetUserRepository):ViewModel() {
     private val _userDataResponseFlow = MutableStateFlow<Resource<UsersDataResponse>?>(null)
     val userDataResponseFlow : StateFlow<Resource<UsersDataResponse>?> = _userDataResponseFlow
 

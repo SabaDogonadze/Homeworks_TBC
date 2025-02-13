@@ -3,12 +3,16 @@ package com.example.tbchomework18.presentation.profile
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tbchomework18.data.local.datastore.SessionTracker
+import com.example.tbchomework18.domain.datastore.DataStoreRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ProfileViewModel:ViewModel() {
+@HiltViewModel
+class ProfileViewModel @Inject constructor(private val dataStoreRepository: DataStoreRepository):ViewModel() {
     fun clearSession() {
         viewModelScope.launch {
-           /* DataStoreUtil.clearSession()*/  // data store must have i think its own module which is not implemented, so i keep this viewmodel as it is now
+            dataStoreRepository.clearSession()  // data store must have i think its own module which is not implemented, so i keep this viewmodel as it is now
             SessionTracker.emitSessionState(false)
         }
     }

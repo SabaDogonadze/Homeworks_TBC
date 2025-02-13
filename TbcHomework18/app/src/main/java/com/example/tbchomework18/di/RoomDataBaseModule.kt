@@ -17,7 +17,7 @@ class RoomDataBaseModule {
 
     @Provides
     @Singleton
-    fun provideRoom(@ApplicationContext context: Context):RoomDatabase{
+    fun provideRoom(@ApplicationContext context: Context):UserDataBase{
         return  Room.databaseBuilder(
             context,
             UserDataBase::class.java,
@@ -25,5 +25,6 @@ class RoomDataBaseModule {
         ).build()
 }
     @Provides
+    @Singleton
     fun provideUserDao(database: UserDataBase) = database.userDao()
 }

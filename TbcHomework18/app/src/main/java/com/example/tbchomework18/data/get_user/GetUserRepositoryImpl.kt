@@ -5,7 +5,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.example.tbchomework18.domain.get_user.GetUserRepository
-import com.example.tbchomework18.paging.MyRemoteMediator
+import com.example.tbchomework18.data.paging.MyRemoteMediator
 import com.example.tbchomework18.room.UserDataBase
 import com.example.tbchomework18.room.UsersEntity
 import kotlinx.coroutines.flow.Flow
@@ -67,7 +67,7 @@ class GetUserRepositoryImpl @Inject constructor(
         val pagingSourceFactory = { userDataBase.userDao().getUsersPagingSource() }
 
         return Pager(
-            config = PagingConfig(pageSize = 2, enablePlaceholders = false),
+            config = PagingConfig(pageSize = 6, enablePlaceholders = false),
             remoteMediator = MyRemoteMediator(getUserService, userDataBase),
             pagingSourceFactory = pagingSourceFactory
         ).flow

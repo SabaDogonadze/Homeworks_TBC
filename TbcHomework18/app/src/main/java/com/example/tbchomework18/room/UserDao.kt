@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.Flow
 interface UserDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun addUser(user:UsersEntity)
+    suspend fun addUsers(user:List<UsersEntity>)
 
     @Query("SELECT * FROM user_table")
     fun readAllData(): Flow<List<UsersEntity>>
