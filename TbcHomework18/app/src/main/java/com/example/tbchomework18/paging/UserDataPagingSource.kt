@@ -1,5 +1,4 @@
-/*
-package com.example.tbchomework18.paging_not_implemented
+package com.example.tbchomework18.paging
 
 import android.accounts.NetworkErrorException
 import android.util.Log.d
@@ -24,10 +23,9 @@ class UserDataPagingSource @Inject constructor(private val getUserService: GetUs
             val currentPage = params.key ?: 1
             val response = getUserService.getUsersData(currentPage)
 
-            */
-/* if (currentPage == 1) { // test if State is Error, how it works.
+ if (currentPage == 1) { // test if State is Error, how it works.
                  throw IOException(" network error")
-             }*//*
+             }
 
 
             d("12345", "Fetched data: ${response.body()}")
@@ -48,4 +46,4 @@ class UserDataPagingSource @Inject constructor(private val getUserService: GetUs
             LoadResult.Error(e)
         }
     }
-}*/
+}

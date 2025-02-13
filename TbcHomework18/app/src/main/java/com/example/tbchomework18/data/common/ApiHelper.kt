@@ -3,7 +3,6 @@ package com.example.tbchomework18.data.common
 import retrofit2.Response
 
 object ApiHelper {
-
     suspend fun <T, R> handleHttpRequest(
         apiCall: suspend () -> Response<T>,
         mapper: (T) -> R,

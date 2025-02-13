@@ -1,4 +1,4 @@
-package com.example.tbchomework18.paging_not_implemented
+package com.example.tbchomework18.paging
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,10 +10,11 @@ import com.example.tbchomework18.R
 import com.example.tbchomework18.databinding.FragmentHomeBinding
 
 class LocationLoadingStateAdapter(
+    private val retry: () -> Unit
 ) : LoadStateAdapter<LocationLoadingStateAdapter.LoadStateViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState): LoadStateViewHolder {
-        return LoadStateViewHolder(parent)
+        return LoadStateViewHolder(parent, retry)
     }
 
     override fun onBindViewHolder(holder: LoadStateViewHolder, loadState: LoadState) {
@@ -22,7 +23,7 @@ class LocationLoadingStateAdapter(
 
     inner class LoadStateViewHolder(
         parent: ViewGroup,
-       /* private val retry: () -> Unit*/
+        private val retry: () -> Unit
     ) : RecyclerView.ViewHolder(
         LayoutInflater.from(parent.context).inflate(R.layout.fragment_home, parent, false)
     ) {
@@ -31,12 +32,12 @@ class LocationLoadingStateAdapter(
         fun bind(loadState: LoadState) {
             binding.apply {
                 loader.isVisible = loadState is LoadState.Loading
-              /*  btnRetry.isVisible = loadState is LoadState.Error*/
+                btnRetry.isVisible = loadState is LoadState.Error
 
-              /*  if (loadState is LoadState.Error) {
+                if (loadState is LoadState.Error) {
                     tvErrorMessage.text = loadState.error.localizedMessage
                     btnRetry.setOnClickListener { retry.invoke() } // retry should be stored as a property in constructor
-                }*/
+                }
             }
         }
     }

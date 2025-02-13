@@ -9,6 +9,8 @@ import com.example.tbchomework18.data.register.RegisterService
 import com.example.tbchomework18.domain.get_user.GetUserRepository
 import com.example.tbchomework18.domain.log_in.LogInRepository
 import com.example.tbchomework18.domain.register.RegisterRepository
+import com.example.tbchomework18.room.UserDao
+import com.example.tbchomework18.room.UserDataBase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -33,7 +35,7 @@ object RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideGetUserRepository(getUsersDataService: GetUsersDataService):GetUserRepository{
-        return  GetUserRepositoryImpl(getUsersDataService)
+    fun provideGetUserRepository(getUsersDataService: GetUsersDataService,dao: UserDataBase):GetUserRepository{
+        return  GetUserRepositoryImpl(getUsersDataService,dao)
     }
 }

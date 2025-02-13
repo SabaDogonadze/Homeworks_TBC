@@ -3,7 +3,6 @@ package com.example.tbchomework18.presentation.log_in
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tbchomework18.data.common.Resource
-import com.example.tbchomework18.data.local.datastore.DataStoreUtil
 import com.example.tbchomework18.data.remote.UserLogInRequest
 import com.example.tbchomework18.domain.log_in.LogInRepository
 import com.example.tbchomework18.domain.log_in.LogInResponse
@@ -24,7 +23,7 @@ class LoginViewModel @Inject constructor(private val logInRepository: LogInRepos
 
     fun saveEmailAndUserSession(email:String){
         viewModelScope.launch {
-            DataStoreUtil.saveEmailAndSession(email)
+          /*  DataStoreUtil.saveEmailAndSession(email)*/
         }
     }
     fun getUserResponse(userLoginRequest: UserLogInRequest){

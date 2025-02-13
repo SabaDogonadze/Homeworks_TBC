@@ -1,4 +1,4 @@
-package com.example.tbchomework18.paging_not_implemented
+package com.example.tbchomework18.paging
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

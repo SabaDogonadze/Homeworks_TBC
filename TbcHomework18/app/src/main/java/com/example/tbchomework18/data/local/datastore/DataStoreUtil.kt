@@ -1,30 +1,25 @@
 package com.example.tbchomework18.data.local.datastore
 
-import android.content.Context
 import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
-import androidx.datastore.preferences.preferencesDataStore
-import com.example.tbchomework18.app.App
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-
-val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
-
-object DataStoreUtil {
+class DataStoreRepository @Inject constructor(private val dataStore: DataStore<Preferences>) {
     val EMAIL = stringPreferencesKey("email")
 
     suspend fun saveEmailAndSession(email:String) {
-        App.application.applicationContext.dataStore.edit { settings ->
+       dataStore.edit { settings ->
             settings[EMAIL] = email
             Log.d("inDadaStore", "Email and session state saved in DataStore: $email")
         }
     }
 
-    fun readEmail():Flow<String> = App.application.applicationContext.dataStore.data
+    fun readEmail():Flow<String> = dataStore.data
         .map { preferences ->
             val email = preferences[EMAIL] ?: ""
             Log.d("inDadaStore", "Email read from DataStore: $email")
@@ -33,7 +28,7 @@ object DataStoreUtil {
 
     suspend fun clearSession() {
         Log.d("inDadaStore", "clearSession invoked")
-        App.application.dataStore.edit { settings ->
+        dataStore.edit { settings ->
             settings[EMAIL] = ""
             Log.d("inDadaStore", "Session cleared in DataStore")
         }

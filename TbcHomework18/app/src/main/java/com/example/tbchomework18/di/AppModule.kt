@@ -1,5 +1,6 @@
 package com.example.tbchomework18.di
 
+import com.example.tbchomework18.data.common.ApiHelper
 import com.example.tbchomework18.data.get_user.GetUsersDataService
 import com.example.tbchomework18.data.log_in.LogInService
 import com.example.tbchomework18.data.register.RegisterService
@@ -28,6 +29,7 @@ object AppModule {
             )
         ).build()
     }
+
 
     @Singleton  // this two are responsible for creating an object
     @Provides

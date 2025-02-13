@@ -2,7 +2,6 @@ package com.example.tbchomework18.presentation.splash
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.tbchomework18.data.local.datastore.DataStoreUtil
 import com.example.tbchomework18.data.local.datastore.SessionTracker
 import kotlinx.coroutines.launch
 

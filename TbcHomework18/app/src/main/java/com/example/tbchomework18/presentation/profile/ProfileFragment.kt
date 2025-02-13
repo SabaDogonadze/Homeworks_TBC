@@ -7,10 +7,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import com.example.tbchomework18.data.local.datastore.DataStoreUtil
 import com.example.tbchomework18.databinding.FragmentProfileBinding
 import com.example.tbchomework18.presentation.base.BaseFragment
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -20,7 +18,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         Log.d("12345", "HomeFragmentOpened")
        viewLifecycleOwner.lifecycleScope.launch {
            repeatOnLifecycle(Lifecycle.State.STARTED){
-               getEmailFromDataStore()  // this is not good practice to use delay i think
+           /*    getEmailFromDataStore()*/  // this is not good practice to use delay i think
                clickListeners()
                delay(1000)
                getDataFromLoginFragment()
@@ -40,7 +38,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         }
     }
 
-    private fun getEmailFromDataStore(){
+   /* private fun getEmailFromDataStore(){
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED){
                 DataStoreUtil.readEmail().collect{
@@ -49,7 +47,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
                 }
             }
         }
-    }
+    }*/
 
     private fun getDataFromLoginFragment() {
         parentFragmentManager.setFragmentResultListener(
