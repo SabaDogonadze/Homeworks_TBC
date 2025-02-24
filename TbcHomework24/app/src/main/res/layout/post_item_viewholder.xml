@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="20dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginEnd="20dp"
+    app:cardBackgroundColor="@color/gray"
+    app:cardCornerRadius="25dp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_user_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_user_image"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/comfortaa_medium"
+            android:text="Alice Smith"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_user_post_date"
+            app:layout_constraintStart_toEndOf="@+id/iv_user_image" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_user_post_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="7dp"
+            android:fontFamily="@font/comfortaa_medium"
+            android:text="20 April at 4:20 PM"
+            android:textColor="@color/light_gray"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_user_image"
+            app:layout_constraintStart_toEndOf="@+id/iv_user_image" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_user_post"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginEnd="19dp"
+            android:fontFamily="@font/comfortaa_medium"
+            android:maxLines="2"
+            android:text="We’re interested in your ideas and would be glad to build something bigger out of it."
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_user_post_date" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_second_photo"
+            android:layout_width="0dp"
+            android:layout_height="75dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/bg_user_post"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/tv_user_post" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_third_photo"
+            android:layout_width="0dp"
+            android:layout_height="75dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/bg_user_post"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/iv_second_photo" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_first_photo"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg_user_post"
+            app:layout_constraintEnd_toEndOf="@+id/guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_user_post" />
+
+        <View
+            android:id="@+id/top_line"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/light_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_first_photo" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_message"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_message"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/top_line" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_comment_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:text="7"
+            android:textColor="@color/light_gray"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_message"
+            app:layout_constraintEnd_toStartOf="@+id/tv_comment"
+            app:layout_constraintStart_toEndOf="@+id/iv_message"
+            app:layout_constraintTop_toTopOf="@id/iv_message" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:fontFamily="@font/comfortaa_medium"
+            android:text="Comments"
+            android:textColor="@color/light_gray"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/vertical_guideline_left"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_message"
+            app:layout_constraintTop_toTopOf="@+id/iv_message" />
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_love"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_love"
+            app:layout_constraintStart_toStartOf="@+id/vertical_guideline_left"
+            app:layout_constraintTop_toBottomOf="@+id/top_line" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_like_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:text="7"
+            android:textColor="@color/light_gray"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_love"
+            app:layout_constraintEnd_toStartOf="@+id/tv_like"
+            app:layout_constraintStart_toEndOf="@+id/iv_love"
+            app:layout_constraintTop_toTopOf="@+id/iv_love" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:fontFamily="@font/comfortaa_medium"
+            android:text="Likes"
+            android:textColor="@color/light_gray"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/vertical_guideline_right"
+            app:layout_constraintBottom_toBottomOf="@id/iv_love"
+            app:layout_constraintTop_toTopOf="@id/iv_love"/>
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/comfortaa_medium"
+            android:text="Share"
+            android:textColor="@color/light_gray"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/top_line" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_share"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="5dp"
+            android:src="@drawable/ic_share"
+            app:layout_constraintBottom_toBottomOf="@id/tv_share"
+            app:layout_constraintEnd_toStartOf="@+id/tv_share"
+            app:layout_constraintTop_toTopOf="@id/tv_share" />
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_user_comment_image"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="40dp"
+            android:background="@drawable/bg_user_image"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bottom_line" />
+
+        <View
+            android:id="@+id/bottom_line"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="19dp"
+            android:background="@color/light_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_share" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_write_comment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/bg_comment"
+            android:drawableEnd="@drawable/ic_file"
+            android:hint="Write comment..."
+            android:textColorHint="@color/light_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_user_comment_image"
+            app:layout_constraintTop_toBottomOf="@+id/bottom_line" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/vertical_guideline_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.39" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/vertical_guideline_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.7" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
