@@ -14,8 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tbchomework18.data.common.Resource
 import com.example.tbchomework18.databinding.FragmentHomeBinding
-import com.example.tbchomework18.data.paging.HomeRecyclerAdapter
-import com.example.tbchomework18.data.paging.LocationLoadingStateAdapter
+import com.example.tbchomework18.presentation.paging.LocationLoadingStateAdapter
 import com.example.tbchomework18.presentation.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
