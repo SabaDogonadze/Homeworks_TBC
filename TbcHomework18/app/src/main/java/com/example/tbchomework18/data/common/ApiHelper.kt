@@ -1,27 +1,23 @@
 package com.example.tbchomework18.data.common
 
+import com.example.tbchomework18.domain.common.Resource
 import retrofit2.Response
 
 object ApiHelper {
-    suspend fun <T, R> handleHttpRequest(
-        apiCall: suspend () -> Response<T>,
-        mapper: (T) -> R,
-    ): Resource<R> {
+    suspend fun <T> handleHttpRequest(
+        apiCall: suspend () -> Response<T>
+    ): Resource<T> {
         val response = apiCall.invoke()
         return try {
             if (response.isSuccessful) {
-                /*   val body = response.body()!!
-                   Resource.Success(dataSuccess = mapper(body))*/
-                val body = response.body()?.let {
-                    Resource.Success(dataSuccess = mapper(it))
-                }?: Resource.Error(errorMessage = "Response is null") // without it it does not work because it returns null
-                return body
+                response.body()?.let {
+                    Resource.Success(dataSuccess = it)
+                } ?: Resource.Error(errorMessage = "Response is null")
             } else {
                 Resource.Error(errorMessage = response.errorBody()?.string() ?: "Unknown error")
             }
         } catch (e: Exception) {
-            Resource.Error(errorMessage = e.message ?: "An error")
+            Resource.Error(errorMessage = e.message ?: "An error occurred")
         }
     }
-
 }

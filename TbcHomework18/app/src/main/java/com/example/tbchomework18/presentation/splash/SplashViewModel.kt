@@ -4,44 +4,29 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tbchomework18.data.local.datastore.SessionTracker
 import com.example.tbchomework18.domain.datastore.DataStoreRepository
+import com.example.tbchomework18.domain.preference_key.PreferenceKeys
+import com.example.tbchomework18.domain.usecase.ReadEmailUseCase
+import com.example.tbchomework18.domain.usecase.ReadRememberMeUseCase
+import com.example.tbchomework18.domain.usecase.SaveSessionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SplashViewModel @Inject constructor(private val dataStoreRepository: DataStoreRepository)  : ViewModel() {
+class SplashViewModel @Inject constructor(private val readEmailUseCase: ReadEmailUseCase, private val readRememberMeUseCase: ReadRememberMeUseCase)  : ViewModel() {
 
     fun readSession() {
-        viewModelScope.launch { // data store must have i think its own module which is not implemented, so i keep this viewmodel as it is now
-            dataStoreRepository.readEmail().collect {
-                SessionTracker.emitSessionState(it.isNotEmpty())
+        viewModelScope.launch(Dispatchers.IO) {
+            combine(
+                readEmailUseCase.invoke(PreferenceKeys.TOKEN, ""),
+                readRememberMeUseCase.invoke(PreferenceKeys.REMEMBER_ME, false)
+            ) { token, rememberMe ->
+                token.isNotEmpty() && rememberMe
+            }.collect { session ->
+                SessionTracker.emitSessionState(session)
             }
         }
     }
 }
-
-
-/* private val _userSession = MutableSharedFlow<Boolean>()
-   val userSession: SharedFlow<Boolean> get() = _userSession*/
-
-
-/*  fun readSession() {
-        viewModelScope.launch {
-            DataStoreUtil.readEmail().collect {
-                if (it.isEmpty()) {
-                    _userSession.emit(false)
-                }else {
-                    _userSession.emit(true)
-                }
-            }
-        }
-    }*/
-
-/* fun clearSession() {
-     Log.d("12345", "clearSession called")
-     viewModelScope.launch {
-         DataStoreUtil.clearSession()
-         _userSession.emit(false)
-         Log.d("12345", " clearSession updated to false")
-     }
- }*/

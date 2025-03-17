@@ -1,76 +1,69 @@
 package com.example.tbchomework18.presentation.log_in
 
+import android.util.Log.d
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.tbchomework18.data.common.Resource
-import com.example.tbchomework18.data.remote.UserLogInRequest
-import com.example.tbchomework18.domain.datastore.DataStoreRepository
-import com.example.tbchomework18.domain.log_in.LogInRepository
-import com.example.tbchomework18.domain.log_in.LogInResponse
+import com.example.tbchomework18.data.remote.register.UserLogInRequest
+import com.example.tbchomework18.domain.common.Resource
+import com.example.tbchomework18.domain.usecase.LogInUseCase
 import com.example.tbchomework18.domain.usecase.validation.ValidateEmailUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val logInRepository: LogInRepository,
+    private val logInUseCase: LogInUseCase,
     private val validateEmailUseCase: ValidateEmailUseCase,
-    private val dataStoreRepository: DataStoreRepository,
 ) : ViewModel() {
-    private val _userLogInResponseFlow = MutableStateFlow<Resource<LogInResponse>?>(null)
-    val userLoginResponseFlow: StateFlow<Resource<LogInResponse>?> = _userLogInResponseFlow
 
-    private val _uiEvents = Channel<LogInEvents>()
+    private val _state = MutableStateFlow(LoginStateUi())
+    val state = _state.asStateFlow()
+
+    private val _uiEvents = Channel<OneTimeLoginInEvents>()
     val uiEvents get() = _uiEvents.receiveAsFlow()
 
-
-    fun saveEmailAndUserSession(email: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            if (!validateEmailUseCase(email)){
-                _uiEvents.send(LogInEvents.ActivateLogInButton(false))
-                return@launch
-            }
-            dataStoreRepository.saveEmailAndSession(email)
-        }
-
-    }
-
-    fun getUserResponse(userLoginRequest: UserLogInRequest) {
-        viewModelScope.launch(Dispatchers.IO) {
-            val response = logInRepository.logIn(userLoginRequest).collect {
-                when (it) {
-                    is Resource.Loading -> {
-                        _userLogInResponseFlow.value = Resource.Loading(it.loading)
-                    }
-
-                    is Resource.Success -> {
-                        _userLogInResponseFlow.value =
-                            Resource.Success(dataSuccess = it.dataSuccess!!)
-                    }
-
-                    is Resource.Error -> {
-                        _userLogInResponseFlow.value = Resource.Error(it.errorMessage)
+    fun event(event: LogInEvent) {
+        when(event) {
+            is LogInEvent.LoginButtonClicked -> {
+                val isEmailValid = validateEmailUseCase.invoke(event.email)
+                d("kkllkk","${isEmailValid && _state.value.isValidPassword}")
+                if (isEmailValid) {/* _state.value.isValidPassword*/
+                    loginUser(UserLogInRequest(event.email,event.password),event.rememberMe)
+                } else {
+                    viewModelScope.launch(Dispatchers.IO) {
+                        _uiEvents.send(OneTimeLoginInEvents.ShowError("Invalid credentials"))
                     }
                 }
             }
         }
     }
 
-   /* fun validateViewInputs(email: String, password: String): Boolean {   // should use use cases
-        if (email.isEmpty()) {
-            _viewsValidationState.value = "Email Is Empty. Please Write Correct Email"
-            return false
+
+    private fun loginUser(userLoginRequest: UserLogInRequest,rememberMe:Boolean) {
+        viewModelScope.launch(Dispatchers.IO) {
+            logInUseCase.invoke(userLoginRequest,rememberMe).collect { result ->
+                when (result) {
+                    is Resource.Loading -> {
+                        _state.update { it.copy(isLoading = true) }
+                    }
+                    is Resource.Success -> {
+                        _state.update { it.copy(isLoading = false, isLoggedIn = true) }
+                        _uiEvents.send(OneTimeLoginInEvents.NavigateToHome)
+                    }
+                    is Resource.Error -> {
+                        _state.update { it.copy(isLoading = false, errorMessage = result.errorMessage) }
+                        _uiEvents.send(OneTimeLoginInEvents.ShowError(result.errorMessage))
+                    }
+                }
+            }
         }
-        if (password.isEmpty()) {
-            _viewsValidationState.value = "Password Is Empty. Please Write Correct Password"
-            return false
-        }
-        return true
-    }*/
+    }
+
 }

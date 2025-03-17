@@ -9,13 +9,11 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import com.example.tbchomework18.data.common.Resource
-import com.example.tbchomework18.data.remote.UserRegisterRequest
 import com.example.tbchomework18.databinding.FragmentRegisterBinding
 import com.example.tbchomework18.presentation.base.BaseFragment
+import com.example.tbchomework18.util.extensions.launchObserver
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import java.util.jar.Pack200
 
 @AndroidEntryPoint
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterBinding::inflate) {
@@ -28,17 +26,17 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
 
     override fun clickListeners() {
         binding.btnRegister.setOnClickListener {
-            val email = binding.etEmail.text.toString().trim()
-            val password = binding.etPassword.text.toString().trim()
-            val repeatPassword = binding.etRepeatPassword.text.toString().trim()
+            viewModel.event(
+                RegisterEvent.RegisterButtonClicked(
+                    binding.etEmail.text.toString(),
+                    binding.etPassword.text.toString(),
+                    binding.etRepeatPassword.text.toString()
+                )
+            )
 
-            if (viewModel.validateViewInputs(email, password, repeatPassword)) {
-                val serverRequest = UserRegisterRequest(email, password)
-                viewModel.userRegister(serverRequest)
-            }
         }
         binding.btnBack.setOnClickListener {
-            goToLogInFragment()
+            viewModel.event(RegisterEvent.BackButtonClicked)
         }
     }
 
@@ -48,41 +46,28 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
 
 
     private fun bindObservers() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.userRegisterResponseFlow.collect {
-                    when (it) {
-                        is Resource.Success -> {
-                            Log.d("12345", "Email saved: $it")
-                            val email = binding.etEmail.text.toString()
-                            val password = binding.etPassword.text.toString()
-                            sendDataToLogInFragment(email,password)
-                            goToLogInFragment()
-                        }
-
-                        is Resource.Error -> {
-                            Log.d("12345", "Email saved: $it")
-                            Toast.makeText(
-                                context,
-                                "Login Failed, Please Check Inputs",
-                                Toast.LENGTH_LONG
-                            ).show()
-                        }
-
-                        is Resource.Loading -> {
-                            binding.progressBar.visibility = View.VISIBLE
-                        }
-
-                        null -> Pack200.Packer.PASS
-                    }
+        launchObserver {
+            viewModel.state.collect { state ->
+                // binding.btnRegister.isEnabled = state.isValidEmail && state.isValidPassword
+                binding.progressBar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+                state.errorMessage?.let { message ->
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                 }
             }
         }
-        viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
-                viewModel.viewsValidationState.collect{
-                    it?.let {
-                        Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+        launchObserver {
+            viewModel.uiEvents.collect { event ->
+                when (event) {
+                    is OneTimeRegisterEvents.NavigateToLogIn -> {
+                        sendDataToLogInFragment(
+                            binding.etEmail.text.toString(),
+                            binding.etPassword.text.toString()
+                        )
+                        goToLogInFragment()
+                    }
+
+                    is OneTimeRegisterEvents.ShowError -> {
+                        Toast.makeText(requireContext(), event.message, Toast.LENGTH_SHORT).show()
                     }
                 }
             }

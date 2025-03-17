@@ -2,59 +2,86 @@ package com.example.tbchomework18.presentation.register
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.tbchomework18.data.common.Resource
-import com.example.tbchomework18.data.remote.UserRegisterRequest
-import com.example.tbchomework18.domain.register.RegisterRepository
-import com.example.tbchomework18.domain.register.RegisterResponse
+import com.example.tbchomework18.data.remote.register.UserRegisterRequest
+import com.example.tbchomework18.domain.common.Resource
+import com.example.tbchomework18.domain.usecase.RegisterUseCase
+import com.example.tbchomework18.domain.usecase.validation.ValidateEmailUseCase
+import com.example.tbchomework18.domain.usecase.validation.ValidateRegisterInputsUseCase
+import com.example.tbchomework18.domain.utils.ValidateRegisterInputsUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class RegisterViewModel @Inject constructor(private val registerRepository: RegisterRepository) :
-    ViewModel() {
-    private val _userRegisterResponseFlow = MutableStateFlow<Resource<RegisterResponse>?>(null)
-    val userRegisterResponseFlow: StateFlow<Resource<RegisterResponse>?> =
-        _userRegisterResponseFlow
+class RegisterViewModel @Inject constructor(
+    private val registerUseCase: RegisterUseCase,
+    private val validateEmailUseCase: ValidateEmailUseCase,
+    private val validateRegisterInputsUseCase: ValidateRegisterInputsUseCase,
+) :
+    ViewModel(){
 
-    private val _viewsValidationState = MutableStateFlow<String?>(null)
-    val viewsValidationState: StateFlow<String?> = _viewsValidationState
+    private val _state = MutableStateFlow(RegisterStateUi())
+    val state = _state.asStateFlow()
 
-    fun userRegister(userRegisterRequest: UserRegisterRequest) {
+    private val _uiEvents = Channel<OneTimeRegisterEvents>()
+    val uiEvents get() = _uiEvents.receiveAsFlow()
+
+    fun event(event: RegisterEvent) {
+        when (event) {
+            is RegisterEvent.RegisterButtonClicked -> {
+                val validationResult = validateRegisterInputsUseCase.invoke(
+                    event.email,
+                    event.password,
+                    event.repeatPassword
+                )
+                if (validationResult is ValidateRegisterInputsUtils.RegisterValidationResult.Success && validateEmailUseCase.invoke(event.email)) {
+                    userRegister(UserRegisterRequest(event.email, event.password))
+                } else {
+                    viewModelScope.launch(Dispatchers.IO) {
+                        _uiEvents.send(OneTimeRegisterEvents.ShowError("Invalid credentials"))
+                    }
+                }
+            }
+
+            RegisterEvent.BackButtonClicked -> viewModelScope.launch(Dispatchers.IO) {
+                _uiEvents.send(OneTimeRegisterEvents.NavigateToLogIn)
+            }
+        }
+    }
+
+
+    private fun userRegister(userRegisterRequest: UserRegisterRequest) {
         viewModelScope.launch(Dispatchers.IO) {
-            val response = registerRepository.register(userRegisterRequest).collect {
-                when (it) {
-                    is Resource.Loading -> {_userRegisterResponseFlow.value = Resource.Loading(it.loading)}
-                    is Resource.Success -> {_userRegisterResponseFlow.value = Resource.Success(dataSuccess = it.dataSuccess!!)}
-                    is Resource.Error -> {_userRegisterResponseFlow.value = Resource.Error(it.errorMessage)}
+            registerUseCase.invoke(userRegisterRequest).collect { result ->
+                when (result) {
+                    is Resource.Loading -> {
+                        _state.update { it.copy(isLoading = true) }
+                    }
+
+                    is Resource.Success -> {
+                        _state.update { it.copy(isLoading = false, isRegistered = true) }
+                        _uiEvents.send(OneTimeRegisterEvents.NavigateToLogIn)
+                    }
+
+                    is Resource.Error -> {
+                        _state.update {
+                            it.copy(
+                                isLoading = false,
+                                errorMessage = result.errorMessage
+                            )
+                        }
+                        _uiEvents.send(OneTimeRegisterEvents.ShowError(result.errorMessage))
+                    }
                 }
             }
         }
     }
 
-    fun validateViewInputs(email: String, password: String, repeatPassword: String): Boolean {
-        if (email.isEmpty()) {
-            _viewsValidationState.value =
-                "Email Is Empty. Please Write Correct Email"   // how can i get a context in viewmodel
-            return false
-        }
-        if (password.isEmpty()) {
-            _viewsValidationState.value = "Password Is Empty. Please Write Correct Password"
-            return false
-        }
-        if (repeatPassword.isEmpty()) {
-            _viewsValidationState.value =
-                "Repeated Password Is Empty. Please Write Correct Password"
-            return false
-        }
-        if (repeatPassword != password) {
-            _viewsValidationState.value = "Repeated Password Is Not Match To A Inputed Password"
-            return false
-        }
-        return true
-    }
 
 }

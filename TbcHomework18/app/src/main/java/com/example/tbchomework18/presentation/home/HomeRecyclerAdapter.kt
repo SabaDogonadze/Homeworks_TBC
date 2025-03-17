@@ -6,15 +6,14 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.tbchomework18.data.remote.UserModel
 import com.example.tbchomework18.databinding.UserDataViewholderBinding
 
-class HomeRecyclerAdapter:  PagingDataAdapter<UserModel, RecyclerView.ViewHolder>(object : DiffUtil.ItemCallback<UserModel>() {
-    override fun areItemsTheSame(oldItem: UserModel, newItem: UserModel): Boolean {
+class HomeRecyclerAdapter:  PagingDataAdapter<UserModelUi, RecyclerView.ViewHolder>(object : DiffUtil.ItemCallback<UserModelUi>() {
+    override fun areItemsTheSame(oldItem: UserModelUi, newItem: UserModelUi): Boolean {
         return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: UserModel, newItem: UserModel): Boolean {
+    override fun areContentsTheSame(oldItem: UserModelUi, newItem: UserModelUi): Boolean {
         return oldItem == newItem
     }
 
@@ -37,7 +36,7 @@ class HomeRecyclerAdapter:  PagingDataAdapter<UserModel, RecyclerView.ViewHolder
 
     inner class UserDataViewHolder(private val binding: UserDataViewholderBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(userData: UserModel) {
+        fun bind(userData: UserModelUi) {
             binding.apply {
                 tvUserEmail.text = userData.email
                 tvUserFirstName.text = userData.firstName

@@ -1,6 +1,6 @@
 package com.example.tbchomework18.domain.get_user
 
-import com.example.tbchomework18.data.remote.UserModel
+import com.example.tbchomework18.data.remote.get_user.UserModel
 
 data class UsersDataResponse (
     val page : Int,

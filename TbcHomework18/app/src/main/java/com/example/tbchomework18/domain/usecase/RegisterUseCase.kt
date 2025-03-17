@@ -1,10 +1,7 @@
 package com.example.tbchomework18.domain.usecase
 
-import com.example.tbchomework18.data.common.Resource
-import com.example.tbchomework18.data.remote.UserLogInRequest
-import com.example.tbchomework18.data.remote.UserRegisterRequest
-import com.example.tbchomework18.domain.log_in.LogInRepository
-import com.example.tbchomework18.domain.log_in.LogInResponse
+import com.example.tbchomework18.domain.common.Resource
+import com.example.tbchomework18.data.remote.register.UserRegisterRequest
 import com.example.tbchomework18.domain.register.RegisterRepository
 import com.example.tbchomework18.domain.register.RegisterResponse
 import kotlinx.coroutines.flow.Flow

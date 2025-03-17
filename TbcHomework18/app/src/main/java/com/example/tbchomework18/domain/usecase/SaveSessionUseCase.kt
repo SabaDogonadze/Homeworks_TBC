@@ -1,18 +1,14 @@
 package com.example.tbchomework18.domain.usecase
 
-import com.example.tbchomework18.data.common.Resource
-import com.example.tbchomework18.data.remote.UserRegisterRequest
+import androidx.datastore.preferences.core.Preferences
 import com.example.tbchomework18.domain.datastore.DataStoreRepository
-import com.example.tbchomework18.domain.register.RegisterRepository
-import com.example.tbchomework18.domain.register.RegisterResponse
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 interface SaveSessionUseCase {
-    suspend operator fun invoke(email:String)
+    suspend operator fun <T>invoke(key: Preferences.Key<T>, value: T)
 }
 class SaveSessionUseCaseImpl @Inject constructor(private val dataStoreRepository: DataStoreRepository):SaveSessionUseCase {
-    override suspend fun invoke(email: String) {
-       return dataStoreRepository.saveEmailAndSession(email)
+    override suspend fun <T> invoke(key: Preferences.Key<T>, value: T) {
+        return dataStoreRepository.saveSessionWithEmail(key,value)
     }
 }

@@ -1,7 +1,8 @@
 package com.example.tbchomework18.presentation.profile
 
-import android.util.Log
+import android.util.Log.d
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -9,47 +10,48 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.tbchomework18.databinding.FragmentProfileBinding
 import com.example.tbchomework18.presentation.base.BaseFragment
+import com.example.tbchomework18.util.extensions.launchObserver
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBinding::inflate) {
     private val profileViewModel: ProfileViewModel by viewModels()
     override fun setUp() {
-        Log.d("12345", "HomeFragmentOpened")
-       viewLifecycleOwner.lifecycleScope.launch {
-           repeatOnLifecycle(Lifecycle.State.STARTED){
-           /*    getEmailFromDataStore()*/  // this is not good practice to use delay i think
-               clickListeners()
-               delay(1000)
-               getDataFromLoginFragment()
-           }
-       }
+        bindObservers()
+        clickListeners()
+        getDataFromLoginFragment()
     }
 
     override fun clickListeners() {
         binding.btnLogOut.setOnClickListener {
-            lifecycleScope.launch {
-                profileViewModel.clearSession()
-                binding.progressBar.visibility = View.VISIBLE
-                delay(3000L)
-                binding.progressBar.visibility = View.GONE
-                openLogInFragment()
-            }
+            profileViewModel.event(ProfileEvent.LogOutButtonClicked)
         }
     }
 
-   /* private fun getEmailFromDataStore(){
-        viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
-                DataStoreUtil.readEmail().collect{
-                    binding.tvEmail.text = it
-                    Log.d("12345", "Email read from DataStore: $it")
-                }
-            }
-        }
-    }*/
+    private fun bindObservers() {
+       launchObserver {
+           profileViewModel.state.collect { state ->
+               d("mmnnmm","$state")
+               binding.progressBar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+               state.errorMessage?.let { message ->
+                   Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+               }
+               state.email?.let { email ->
+                   binding.tvEmail.text = email
+               }
+           }
+       }
+
+       launchObserver {
+           profileViewModel.uiEvents.collect { event ->
+               when (event) {
+                   is OneTimeProfileEvents.NavigateToLogIn -> openLogInFragment()
+                   is OneTimeProfileEvents.ShowError -> Toast.makeText(requireContext(), event.message, Toast.LENGTH_SHORT).show()
+               }
+           }
+       }
+    }
 
     private fun getDataFromLoginFragment() {
         parentFragmentManager.setFragmentResultListener(
@@ -62,6 +64,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     }
 
     private fun openLogInFragment() {
-        findNavController().navigate(ProfileFragmentDirections.actionHomeFragmentToLogInFragment())
+        findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToLogInFragment())
     }
 }

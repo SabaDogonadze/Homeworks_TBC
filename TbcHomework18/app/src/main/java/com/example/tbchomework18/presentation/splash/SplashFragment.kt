@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.tbchomework18.data.local.datastore.SessionTracker
 import com.example.tbchomework18.databinding.FragmentSplashBinding
 import com.example.tbchomework18.presentation.base.BaseFragment
+import com.example.tbchomework18.util.extensions.launchObserver
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -44,14 +45,12 @@ class SplashFragment : Fragment(){ // i dont need base fragment here because it 
     }
 
     private fun bindObservers() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                SessionTracker.userSession.collect {
-                    delay(1000)
-                    openFragments(it)
-                }
-            }
-        }
+       launchObserver {
+           SessionTracker.userSession.collect {
+               delay(1000)
+               openFragments(it)
+           }
+       }
     }
 
     private fun openFragments(session: Boolean) {
