@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1047329863167",
+    "project_id": "davaleba28",
+    "storage_bucket": "davaleba28.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1047329863167:android:580553adbad8e0ce5023ca",
+        "android_client_info": {
+          "package_name": "com.example.tbchomework28"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMIdeh_YmW0pPgCgpvf2BtXBCjdSrAd9Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

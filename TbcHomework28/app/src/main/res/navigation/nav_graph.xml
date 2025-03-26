@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/imageFragment">
+
+    <fragment
+        android:id="@+id/imageFragment"
+        android:name="com.example.tbchomework28.presenter.screen.ImageFragment"
+        android:label="fragment_image"
+        tools:layout="@layout/fragment_image" >
+        <action
+            android:id="@+id/action_imageFragment_to_cameraBottomSheetFragment"
+            app:destination="@id/cameraBottomSheetFragment" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/cameraBottomSheetFragment"
+        android:name="com.example.tbchomework28.presenter.screen.CameraBottomSheetFragment"
+        android:label="fragment_camera_bottom_sheet"
+        tools:layout="@layout/fragment_camera_bottom_sheet" >
+        <action
+            android:id="@+id/action_cameraBottomSheetFragment_to_imageFragment"
+            app:destination="@id/imageFragment" />
+    </dialog>
+</navigation>
