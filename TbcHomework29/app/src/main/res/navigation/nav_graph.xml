@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/moneyTransferFragment">
+
+    <fragment
+        android:id="@+id/moneyTransferFragment"
+        android:name="com.example.tbchomework29.presenter.screen.money_transfer.MoneyTransferFragment"
+        android:label="fragment_money_transfer"
+        tools:layout="@layout/fragment_money_transfer" >
+        <action
+            android:id="@+id/action_moneyTransferFragment_to_fromAccountBottomSheetFragment"
+            app:destination="@id/fromAccountBottomSheetFragment" />
+        <argument
+            android:name="id"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="1" />
+        <action
+            android:id="@+id/action_moneyTransferFragment_to_toAccountBottomSheetFragment"
+            app:destination="@id/toAccountBottomSheetFragment" />
+        <argument
+            android:name="cardNumber"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="EU67JG7744036080300003" />
+    </fragment>
+    <dialog
+        android:id="@+id/fromAccountBottomSheetFragment"
+        android:name="com.example.tbchomework29.presenter.screen.bottom_sheet.from_account.FromAccountBottomSheetFragment"
+        android:label="fragment_from_account_bottom_sheet"
+        tools:layout="@layout/fragment_from_account_bottom_sheet" >
+        <action
+            android:id="@+id/action_fromAccountBottomSheetFragment_to_moneyTransferFragment"
+            app:destination="@id/moneyTransferFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+    </dialog>
+    <dialog
+        android:id="@+id/toAccountBottomSheetFragment"
+        android:name="com.example.tbchomework29.presenter.screen.bottom_sheet.to_account.ToAccountBottomSheetFragment"
+        android:label="fragment_to_account_bottom_sheet"
+        tools:layout="@layout/fragment_to_account_bottom_sheet" >
+        <action
+            android:id="@+id/action_toAccountBottomSheetFragment_to_moneyTransferFragment"
+            app:destination="@id/moneyTransferFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+    </dialog>
+</navigation>
